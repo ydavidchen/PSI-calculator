@@ -1,38 +1,53 @@
-# PSI Calculator
+# Vertex AI Studio Frontend App with Node.js Backend
 
-A Simple web app to calculate PSI from 3-column CSV
+This repository contains a frontend and a Node.js backend, designed to run together.
+The backend acts as a proxy, handling Google Cloud API calls.
 
-## Purpose
+This project is intended for demonstration and prototyping purposes only.
+It is not intended for use in a production environment.
 
-All code here are created with GenAI in March 2026. The purpose of this app is to demonstrate the power of GenAI in building such a web app.
+## Prerequisites
 
-## App Development
+To run this application locally, you need:
 
-A prompt-based approach was to generate the core source code: 
+*   **[Google Cloud SDK / gcloud CLI](https://cloud.google.com/sdk/docs/install)**: Follow the instructions to install the SDK.
 
-```
-Build an app to compute and plot Population Stability Index,
-and create a narrative summary (e.g. whether the PSI fluctuates much, whether the PSI exceeds 0.25)
+*   **gcloud Initialization**:
+    *   Initialize the gcloud CLI:
+        ```bash
+        gcloud init
+        ```
+    *   Authenticate for Application Default Credentials (needed to call Google Cloud APIs):
+        ```bash
+        gcloud auth application-default login
+        ```
 
-Let user upload their data.
+*   **Node.js and npm**: Ensure you have Node.js and its package manager, `npm`, installed on your machine.
 
-In the "Upload Data" section, add a button to allow users to "Submit" the file chosen.
-```
+## Project Structure
 
-## Test Data
+The project is organized into two main directories:
 
-R and Python code are used to simulate a small sample data with `n_bins=20` and chosen `target_psi=0.15`. 
+*   `frontend/`: Contains the Frontend application code.
+*   `backend/`: Contains the Node.js/Express server code to proxy Google Cloud API calls.
 
-These data-simulation scripts were created using OpenAI ChatGPT as follows: 
+## Backend Environment Variables
 
-```
-Write R code to simulate some data for PSI calculation. Export the results in CSV
+The `backend/.env.local` file is automatically generated when you download this application.
+It contains essential Google Cloud environment variables pre-configured based on your project settings at the time of download.
 
-named "bin", "expected", "actual". Please only create the R script
+The variables set in `backend/.env.local` are:
+*   `API_BACKEND_PORT`: The port the backend API server listens on (e.g., `5000`).
+*   `API_PAYLOAD_MAX_SIZE`: The maximum size of the request payload accepted by the backend server (e.g., `5mb`).
+*   `GOOGLE_CLOUD_LOCATION`: The Google Cloud region associated with your project.
+*   `GOOGLE_CLOUD_PROJECT`: Your Google Cloud Project ID.
 
-Modify the code so that users can set a PSI, and then the data will be simulated according to the PSI chosen
+**Note:** These variables are automatically populated during the download process.
+You can modify the values in `backend/.env.local` if you need to change them.
 
-Make a python version of this script. Set default PSI = 0.15; number of data points = 1e4; number of bins = 20
-```
+## Installation and Running the App
 
-GenAI has its own risk. Use at your own discretion.
+To install dependencies and run your Google Cloud Vertex AI Studio App locally, execute the following command:
+
+```bash
+npm install && npm run dev
